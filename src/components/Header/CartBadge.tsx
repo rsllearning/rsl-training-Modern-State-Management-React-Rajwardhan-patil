@@ -1,11 +1,15 @@
 import React from 'react';
+import { useCartState } from '../../context/CartContext';
 
 interface CartBadgeProps {
   onClick: () => void;
 }
 
 export const CartBadge: React.FC<CartBadgeProps> = ({ onClick }) => {
-  const totalCount = 0;
+  const { items } = useCartState();
+
+  // compute total items count
+  const totalCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <button
