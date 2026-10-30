@@ -1,11 +1,14 @@
 import React from 'react';
+import { useAtomValue } from 'jotai';
+import { totalCountAtom } from '../../atoms/cartAtoms';
 
 interface CartBadgeProps {
   onClick: () => void;
 }
 
 export const CartBadge: React.FC<CartBadgeProps> = ({ onClick }) => {
-  const totalCount = 0;
+  // strictly subscribe to derived total count atom only
+  const totalCount = useAtomValue(totalCountAtom);
 
   return (
     <button
