@@ -8,6 +8,9 @@ interface ToolbarProps {
 export const Toolbar: React.FC<ToolbarProps> = ({ onOpenCart }) => {
   return (
     <div className="toolbar">
+      <div className="toolbar-info">
+        <span className="badge-tag">Jotai Atoms</span>
+      </div>
       <CartBadge onClick={onOpenCart} />
     </div>
   );
