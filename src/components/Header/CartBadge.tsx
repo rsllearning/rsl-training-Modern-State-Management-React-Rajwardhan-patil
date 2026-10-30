@@ -1,11 +1,13 @@
 import React from 'react';
+import { selectTotalCount, useCartStore } from '../../store/cartStore';
 
 interface CartBadgeProps {
   onClick: () => void;
 }
 
 export const CartBadge: React.FC<CartBadgeProps> = ({ onClick }) => {
-  const totalCount = 0;
+  // subscribe only to total items count derived via selector
+  const totalCount = useCartStore(selectTotalCount);
 
   return (
     <button
