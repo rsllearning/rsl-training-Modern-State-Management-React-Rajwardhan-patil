@@ -1,5 +1,8 @@
 import React from 'react';
 import { CartItemsList } from './CartItemsList';
+import { CartErrorBanner } from './CartErrorBanner';
+import { CheckoutButton } from './CheckoutButton';
+import { selectTotalPrice, useCartStore } from '../../store/cartStore';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -7,6 +10,8 @@ interface CartDrawerProps {
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
+  const totalPrice = useCartStore(selectTotalPrice);
+
   if (!isOpen) return null;
 
   return (
@@ -31,7 +36,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
+        {/* Decomposed leaf components subscribing granularly to their slices */}
+        <CartErrorBanner />
         <CartItemsList />
+
+        <div className="cart-summary-footer">
+          <div className="total-row">
+            <span className="total-label">Subtotal:</span>
+            <span className="total-amount">₹{totalPrice.toLocaleString('en-IN')}</span>
+          </div>
+          <CheckoutButton />
+        </div>
       </div>
     </div>
   );
